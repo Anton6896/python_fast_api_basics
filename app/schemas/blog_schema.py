@@ -4,13 +4,13 @@ from pydantic import BaseModel
 from datetime import datetime
 
 
-class User(BaseModel):
-    username: str
+class UserSchema(BaseModel):
+    name: str
 
 
-class Blog(BaseModel):
+class BlogSchema(BaseModel):
     title: str
     body: str
     published: Optional[bool]
-    created_by: User
+    created_by: UserSchema
     created_at: datetime

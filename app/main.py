@@ -1,9 +1,14 @@
 from typing import NoReturn, Optional
-
 from fastapi import FastAPI
-from .schemas.blog_schema import Blog
+
+from app.schemas.blog_schema import BlogSchema
+from app.user.models import User
+from app.blog.models import Blog
+from app.db.database import Base
+from app.db.database import engine
 
 server = FastAPI()
+Base.metadata.create_all(engine)  # ensure all tables 
 
 
 # ==============================================================  GET
@@ -35,5 +40,5 @@ def blog_query(q: Optional[str] = None, limit: int = 10, publish: bool = True):
 # ============================================================== POST
 
 @server.post('/blog')
-def create_blog(request: Blog):
+def create_blog(request: BlogSchema):
     return {'request': f'{request}'}

@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "myconn",
+            "database": "${workspaceFolder:python_fast_api_basics}/app/db/blog.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
