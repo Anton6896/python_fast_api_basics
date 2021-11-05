@@ -1,5 +1,6 @@
 from typing import NoReturn, Optional
 from fastapi import FastAPI, Depends
+from sqlalchemy.orm import relationship
 
 from app.schemas.blog_schema import BlogSchema
 from app.user.models import User
@@ -10,6 +11,7 @@ from app.db.database import SessionLocal
 from sqlalchemy.orm import Session
 
 server = FastAPI()
+
 Base.metadata.create_all(engine)  # ensure all tables
 
 
@@ -17,8 +19,9 @@ Base.metadata.create_all(engine)  # ensure all tables
 
 
 @server.get("/")
-def initial():
-    return {"msg": "all blog list "}
+def initial(db: Session = Depends(get_db)):
+    blogs = db.query(Blog).all()
+    return {'data': blogs}
 
 
 @server.get("/blog/{id}")
@@ -46,7 +49,7 @@ def blog_query(q: Optional[str] = None, limit: int = 10, publish: bool = True):
 def create_blog(request: BlogSchema, db: Session = Depends(get_db)):
     new_blog = Blog(
         title=request.title,
-        body=request.body,
+        body=request.body
     )
 
     db.add(new_blog)

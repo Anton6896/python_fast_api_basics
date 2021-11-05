@@ -21,7 +21,7 @@ for learn porpose in prod use getenv !!!
 # )
 
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./app/db/blog.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./blog1.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,

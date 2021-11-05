@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from app.db.database import Base
+from app.user.models import User
 
 
 class Blog(Base):
@@ -15,5 +16,3 @@ class Blog(Base):
     is_active = Column(Boolean, default=True)
     published: Column(Boolean, default=True)
     created_at: Column(DateTime, default=datetime.now())
-
-    # created_by: relationship("User", back_populates="blogs")
