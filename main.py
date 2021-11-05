@@ -11,7 +11,7 @@ def initial():
 
 
 @server.get('/blog')
-def blog_query(q: Optional[str] = None):
+def blog_query(q: Optional[str] = None, limit: int = 10, publish: bool = True):
     if q:
         return {'blog query': f'query {q}'}
     else:
