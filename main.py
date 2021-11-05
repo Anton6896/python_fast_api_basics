@@ -2,19 +2,32 @@ from typing import NoReturn, Optional
 
 from fastapi import FastAPI
 
-app = FastAPI()
+server = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+@server.get("/")
+def initial():
+    return {"msg": "all blog list "}
 
 
-@app.get("/{number}/this")
-def read_root(number: int):
-    return {"number": f"{number}"}
+@server.get('/blog')
+def blog_query(q: Optional[str] = None):
+    if q:
+        return {'blog query': f'query {q}'}
+    else:
+        return {'blog query': f'add "?q" for query'}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@server.get("blog/{id}")
+def blog_id(id: int):
+    return {"blog number ": f"{id}"}
+
+
+@server.get("/blog/{id}/comment")
+def blog_comments(id: int):
+    return {'blog comment': f'comment for {id} blog'}
+
+
+# @server.get("/items/{item_id}")
+# def read_item(item_id: int, q: Optional[str] = None):
+#     return {"item_id": item_id, "q": q}
