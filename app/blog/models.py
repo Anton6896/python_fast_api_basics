@@ -16,4 +16,4 @@ class Blog(Base):
     published: Column(Boolean, default=True)
     created_at: Column(DateTime, default=datetime.now())
 
-    created_by: relationship("User", back_populates="blogs")
+    # created_by: relationship("User", back_populates="blogs")

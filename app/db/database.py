@@ -24,10 +24,20 @@ for learn porpose in prod use getenv !!!
 SQLALCHEMY_DATABASE_URL = "sqlite:///./app/db/blog.db"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={
+        "check_same_thread": False
+    }
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 
+def get_db():
+    db_session = SessionLocal()
+    try:
+        yield db_session
+    except Exception:
+        pass
+    finally:
+        db_session.close()

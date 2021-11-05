@@ -12,4 +12,4 @@ class User(Base):
     password = Column(String)
     is_active = Column(Boolean, default=True)
 
-    blogs = relationship("Blog", back_populates="created_by")
+    # blogs = relationship("Blog", back_populates="created_by")
